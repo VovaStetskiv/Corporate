@@ -64,6 +64,11 @@ class ArticleController extends SiteController
             $article->img = json_decode($article->img);
         }
 
+        $this->title = $article->title;
+
+        $this->keywords = $article->keywords;
+
+
         $content = view(env('THEME').'.single_article')->with(['article' => $article])->render();
 
         $this->template_vars = array_add($this->template_vars,'content', $content);
@@ -74,6 +79,7 @@ class ArticleController extends SiteController
 
         $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios])->render();
 
+//        dd($article->comments->groupBy('parent_id'));
 
         return $this->renderOutput();
 
